@@ -63,7 +63,29 @@
 | 25 | 宝石替换 | hcc | 7／9 |
 | 26 | 用户点击关注主播后，如果检测到用户未打开通知，提示“请在设置中打开通知接收功能，我们将在直播开始时通知您”并给到button去到通知设置界面，提示最多每10天一次；| hcc | 10/9 |
 | 27 | 用户创建了计划书并分享后，如果检测到用户未打开通知，在用户回到app时提示“请在设置中打开通知接收功能，客户浏览计划书后我们将及时通知您”并给到button去到通知设置界面，提示最多每10天一次；| hcc | 10/9 |
+| 29 | 通用链接, 跳转到直播| hcc | 12/9 |
 
+# bridge 接口
+
+## 原生接口（方法名请自行脑补ios/android前缀）：
+1. 关闭webView - CloseView()
+2. 跳转到录播回放原生页 - GotoPrimitiveView({type: watchRecord, data: {String url,String uuid}})
+3. 社区评论帖子/回复 - CommunityComment({targetType: 'post', targetId: 111,targetName:'叶云燕',newsId:123, comment: 'lalalala'})
+4. CommunityComment({targetType: 'reply', targetId: 0,targetName:'',newsId:123, comment: 'blahblah'})
+5. 社区举报帖子/回复 - CommunityReportAbuse({targetType: 'post', targetId: 'aabc'})
+CommunityReportAbuse({targetType: 'reply', targetId: 'defg'})
+6. 社区评论点赞 - CommunityLike({targetType: 'post', targetId: 'aabc', like: true/false})
+CommunityLike({targetType: 'reply', targetId: 'defg', like: true/false})
+
+
+## JS接口（方法名请自行脑补js前缀）：
+1. OnCommunityCommentDone({success: true/false, info: 'empty string or error detail'})//成功刷新页面  失败无须通知
+2. OnCommunityLikeDone({success: true/false, info: 'empty string or error detail', action: //CommunityLike的参数原样})
+3. OnCommunityReportAbuseDone({success: true/false, info: 'empty string or error detail', action: //CommunityReportAbuse的参数原样})
+
+备注：
+CommunityComment锁界面，网络返回后才放开，所以没有竞争条件
+CommunityReportAbuse和CommunityLike不锁界面，所以需要传回原参数当作标识 
 
 
 

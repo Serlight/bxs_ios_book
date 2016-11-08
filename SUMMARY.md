@@ -8,3 +8,5 @@
 	* [任务](Content/bxs2.2.0/tasks.md)
 * [保险师2.3.0](Content/bxs2.3.0/README.md)
   * [任务](Content/bxs2.3.0/tasks.md)
+* [Tips](Content/Tips/README.md)
+  * [ChildViewController](Content/Tips/childViewController.md)
